@@ -25,7 +25,7 @@ void main() {
     if (inputConsent == "Ja") {
       hasParentalConsent = true;
       int minAge = movieAgeRating - 2;
-      bool isMinAge = agePerson > minAge;
+      bool isMinAge = agePerson >= minAge;
 
       // print(
       //   "Das Mindestalter ist: $minAge, das Alter der Person ist $agePerson, hasParentalConsent ist $hasParentalConsent und isMinAge ist $isMinAge",
