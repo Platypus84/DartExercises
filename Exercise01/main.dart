@@ -8,7 +8,8 @@ void main() {
   int twelve = 12;
   String e = "!";
   int a = 24;
-  String c = "Schöner";
+  String c = "Schöne";
   String morning = "Morgen";
   String s = "Heute";
+  String spa = " ";
 }
