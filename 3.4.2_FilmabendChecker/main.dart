@@ -10,7 +10,7 @@ void main() {
   print(
     "\n" + "Du möchtest den Film '$movie' (FSK $movieAgeRating) ausleihen.",
   );
-  print("Altersprüfung: Bitte gib dein Alter in Jahren ein:");
+  print("Altersprüfung: Bitte gib dein Alter ein:");
   String? inputAge = stdin.readLineSync();
   agePerson = int.parse(inputAge ?? '0');
 
@@ -23,15 +23,15 @@ void main() {
     print("Bitte gib 'Ja' oder 'Nein' ein:");
     String? inputConsent = stdin.readLineSync();
     if (inputConsent == "Ja") {
-      hasParentalConsent == true;
+      hasParentalConsent = true;
       int minAge = movieAgeRating - 2;
       bool isMinAge = agePerson > minAge;
 
-      print(
-        "Das Mindestalter ist: $minAge, das Alter der Person ist $agePerson und isMinAge ist $isMinAge",
-      );
+      // print(
+      //   "Das Mindestalter ist: $minAge, das Alter der Person ist $agePerson, hasParentalConsent ist $hasParentalConsent und isMinAge ist $isMinAge",
+      // );
 
-      if ((isMinAge == true) && (hasParentalConsent == true)) {
+      if (isMinAge && hasParentalConsent) {
         print("\n" + "Der Film '$movie' liegt für dich bereit!" + "\n");
       } else {
         print(
