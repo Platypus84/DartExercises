@@ -4,7 +4,7 @@ void main() {
   List<double?> windData = [];
   List<String> weatherType = ['temp', 'rain', 'wind'];
 
-  // Liste hat garantiert immer 3 Elemente
+  // Liste mit Wetterdaten, Anzahl der Elemente egal
   List<Map<String, double?>> weatherData = [
     {'temp': 5.3, 'rain': 0.9, 'wind': null},
     {'temp': 4.5, 'rain': null, 'wind': 16.8},
@@ -20,7 +20,7 @@ void main() {
     return sum;
   }
 
-  // Füge die Temperaturen der Wetterdaten in die Liste ein
+  // Füge die Temperaturen der Wetterdaten in die Liste ein, wenn nicht null
   // temps.add(weatherData[0]['temp'] ?? 0);
   // temps.add(weatherData[1]['temp'] ?? 0);
   // temps.add(weatherData[2]['temp'] ?? 0);
