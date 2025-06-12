@@ -7,6 +7,11 @@ void main() {
     case (Weekday.monday || Weekday.tuesday):
       print('Montag und Dienstag sind anstrengend');
       break;
+    // Heute gelernt, dass nur in Dart breaks in switch nicht nötig sind,
+    //sobald die erste Kondition true ist, auch wenn andere danach noch true sind.
+    //Da break; in Dart aber auch nicht als falsch markiert wird,
+    //lasse ich sie drin, da ich es aus Sicherheitsgründen
+    //aus anderen Sprachen so gewohnt bin und diese Konvention wichtig finde.
     case (Weekday.wednesday || Weekday.thursday):
       print('Mittwoch und Donnerstag sind anstrengend');
       break;
