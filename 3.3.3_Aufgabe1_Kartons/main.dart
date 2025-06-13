@@ -12,4 +12,8 @@ void main() {
   String morning = "Morgen";
   String s = "Heute";
   String spa = " ";
+
+  print(
+    'Alle Werte: $gdStr $dayStr $worldStr $d $timeStr $seven $twelve $e $a $c $morning $s $spa',
+  );
 }
