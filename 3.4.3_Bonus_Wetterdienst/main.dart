@@ -15,4 +15,6 @@ void main() {
       ((4.5 >= weatherData[1]['temp']!)
           ? (weatherData[1]['temp']!)
           : (weatherData[1]['wind']!));
+
+  print(y);
 }
