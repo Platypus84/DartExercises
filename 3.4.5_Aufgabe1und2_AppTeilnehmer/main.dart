@@ -15,13 +15,12 @@ void main() {
   int sumPoints = 0;
   int amountPoints = points.length;
 
-  print('\n' + 'Aufgabe 1 - Lösung 1:');
-
+  print('Aufgabe 1 - Lösung 1:');
   for (String name in names) {
     print(name);
   }
   print('\n');
-  print('\n' + 'Aufgabe 1 - Lösung 2:');
+  print('Aufgabe 1 - Lösung 2:');
   names.forEach(print);
 
   print('\n' + 'Aufgabe 2 - Lösung:');
