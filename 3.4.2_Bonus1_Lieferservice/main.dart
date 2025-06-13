@@ -2,7 +2,7 @@ import "dart:io";
 
 void main() {
   double oderValue = 0;
-  int distance = 36; // in km
+  late int? distance; // in km
   bool rushHour = false;
   bool isRaining = false;
   bool inputCorrect = false;
@@ -16,9 +16,13 @@ void main() {
   double amountDiscount = 0;
   double totalPrice = 0;
 
+  print("\n" + "Gib eine Distanz in km ein:");
+  String? inputDistance = stdin.readLineSync();
+  distance = int.parse(inputDistance ?? "0");
+
   // Grundliefergebühr:
   deliveryFee = distance <= 5 ? 2.5 : 0;
-  deliveryFee = (distance > 5 ?? distance <= 10) ? 3.5 : 0;
+  deliveryFee = (distance > 5 && distance <= 10) ? 3.5 : 0;
   deliveryFee = distance > 10 ? 5 : 0;
 
   // Distanzzuschlag:
