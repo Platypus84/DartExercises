@@ -1,5 +1,5 @@
 void main() {
-  int age = 25; // Alter
+  int age = 25;
   String sex = 'male';
 
   switch (sex) {
