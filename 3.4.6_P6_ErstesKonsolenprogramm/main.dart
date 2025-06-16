@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:math';
 
 void main() {
+  terminalColors();
   calculator();
 }
 
@@ -31,28 +32,40 @@ void calculator() {
 
   print(
     '\n' +
-        'Dein Taschenrechner - Wähle eine Rechenart aus der Liste anhand ihrer Ziffer:',
+        ' Dein Taschenrechner - Wähle eine Rechenart aus der Liste anhand ihrer Ziffer:',
   );
-  print('- - - - - - - - - -');
-  print('Addition = 1');
-  print('Subtraktion = 2');
-  print('Multiplikation = 3');
-  print('Division = 4');
-  print('Modulo = 5');
-  print('Quadratwurzel = 6');
-  print('- - - - - - - - - -' + '\n');
+  print(' - - - - - - - - - -');
+  print('  Addition = 1');
+  print('  Subtraktion = 2');
+  print('  Multiplikation = 3');
+  print('  Division = 4');
+  print('  Modulo = 5');
+  print('  Quadratwurzel = 6');
+  print(' - - - - - - - - - -' + '\n');
   int calculus = int.parse(stdin.readLineSync() ?? '0');
 
   if (!allowedNumbers.contains(calculus)) {
-    print('Fehler: Für die Ziffer $calculus existiert keine Rechenart!' + '\n');
+    print(
+      '\u001B[31m' +
+          'Fehler: Für die Ziffer' +
+          '$calculus existiert keine Rechenart!' +
+          '\n',
+    );
   } else {
     // Ausgabe der gewählten Rechenart
-    print('\n' + 'Du hast ${calcTypes[calculus]} als Rechenart gewählt.');
+    print(
+      '\n' +
+          ' Du hast ' +
+          '\u001b[34m' +
+          '${calcTypes[calculus]}' +
+          '\u001b[30m' +
+          ' als Rechenart gewählt.',
+    );
 
     // Eingabe der Zahlen
     print(
       '\n' +
-          'Gib die ' +
+          ' Gib die ' +
           '${calculus != 6 ? 'erste ' : ''}' +
           'Zahl (${calcOperands[calculus]?.first}) ein:',
     );
@@ -60,7 +73,8 @@ void calculator() {
 
     if (calculus != 6) {
       print(
-        '\n' + 'Gib die zweite Zahl (${calcOperands[calculus]?.last}) ein:',
+        '\n' +
+            ' Gib die zweite Zahl (${calcOperands[calculus]?.last}) ein:', // To Do: Regex zur Prüfung, dass nur Zahlen eingegeben werden!
       );
       operand02 = double.parse(stdin.readLineSync() ?? '0');
     }
@@ -79,10 +93,10 @@ void calculator() {
       case 6:
         result = root(operand01);
       default:
-        print('Fehler: Keine Rechenart gewählt');
+        print(' Fehler: Keine Rechenart gewählt');
     }
     print('\n' + '- - - Das Ergebnis - - -');
-    print('\n' + '$result');
+    print('\n' + '\u001b[32m' + ' $result' + '\u001b[30m');
     print('\n' + '- - - - - -' + '\n');
   }
 }
@@ -115,4 +129,13 @@ double modulo(operand01, operand02) {
 double root(operand01) {
   double result = sqrt(operand01);
   return result;
+}
+
+void terminalColors() {
+  String Color = "\u001B[";
+  String LETTERS_BLACK = Color + "30m";
+  String LETTERS_ERROR = Color + "31m"; // Color Red
+  String BACKGROUND_YELLOW = Color + "33m";
+  String BACKGROUND_WHITE = Color + "47m";
+  print(BACKGROUND_WHITE + LETTERS_BLACK);
 }
