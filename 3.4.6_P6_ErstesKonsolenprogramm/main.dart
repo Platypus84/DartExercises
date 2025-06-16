@@ -7,6 +7,7 @@ void main() {
 }
 
 void calculator() {
+  // Variablen:
   late double operand01;
   late double operand02;
   late double result;
@@ -30,6 +31,7 @@ void calculator() {
     6: ['Radikand', ''],
   };
 
+  // Ausgabe Taschenrechner Funktionsmenü:
   print(
     '\n' +
         ' Dein Taschenrechner - Wähle eine Rechenart aus der Liste anhand ihrer Ziffer:',
@@ -41,6 +43,7 @@ void calculator() {
   print(' - - - - - - - - - -' + '\n');
   int calculus = int.parse(stdin.readLineSync() ?? '0');
 
+  // Prüfung Eingabewert:
   while (!allowedNumbers.contains(calculus)) {
     print(
       '\u001B[31m' +
@@ -55,7 +58,7 @@ void calculator() {
     calculus = int.parse(stdin.readLineSync() ?? '0');
   }
 
-  // Ausgabe der gewählten Rechenart
+  // Ausgabe der gewählten Rechenart:
   print(
     '\n' +
         ' Du hast ' +
@@ -65,7 +68,7 @@ void calculator() {
         ' als Rechenart gewählt.',
   );
 
-  // Eingabe der Zahlen
+  // Eingabe der Operanden:
   print(
     '\n' +
         ' Gib die ' +
@@ -77,11 +80,12 @@ void calculator() {
   if (calculus != 6) {
     print(
       '\n' +
-          ' Gib die zweite Zahl (${calcOperands[calculus]?.last}) ein:', // To Do: Regex zur Prüfung, dass nur Zahlen eingegeben werden!
+          ' Gib die zweite Zahl (${calcOperands[calculus]?.last}) ein:', // To Do: Regex zur Prüfung, dass nur Zahlen für Operande 1 und 2 eingegeben werden!
     );
     operand02 = double.parse(stdin.readLineSync() ?? '0');
   }
 
+  // Verarbeitung der Operanden je nach Rechenart:
   switch (calculus) {
     case 1:
       result = addition(operand01, operand02);
@@ -98,6 +102,8 @@ void calculator() {
     default:
       print(' Fehler: Keine Rechenart gewählt');
   }
+
+  // Ausgabe des Rechenergebnisses:
   print('\n' + '- - - Das Ergebnis - - -');
   print('\n' + '\u001b[32m' + ' $result' + '\u001b[30m');
   print('\n' + '- - - - - - - - - - - - ' + '\n');
