@@ -2,7 +2,6 @@ import 'dart:io';
 import 'dart:math';
 
 void main() {
-  terminalColors();
   calculator();
 }
 
@@ -12,6 +11,8 @@ void calculator() {
   late double operand02;
   late double result;
   List<int> allowedNumbers = [1, 2, 3, 4, 5, 6];
+  Map calcBaseColors = terminalColors('black', 'white');
+  print(calcBaseColors['letterColor'] + calcBaseColors['backgroundColor']);
 
   Map<int, String> calcTypes = {
     1: 'Addition',
@@ -109,41 +110,71 @@ void calculator() {
   print('\n' + '- - - - - - - - - - - - ' + '\n');
 }
 
-double addition(operand01, operand02) {
+double addition(double operand01, double operand02) {
   double result = operand01 + operand02;
   return result;
 }
 
-double subtraction(operand01, operand02) {
+double subtraction(double operand01, double operand02) {
   double result = operand01 - operand02;
   return result;
 }
 
-double multiplication(operand01, operand02) {
+double multiplication(double operand01, double operand02) {
   double result = operand01 * operand02;
   return result;
 }
 
-double division(operand01, operand02) {
+double division(double operand01, double operand02) {
   double result = operand01 / operand02;
   return result;
 }
 
-double modulo(operand01, operand02) {
+double modulo(double operand01, double operand02) {
   double result = operand01 % operand02;
   return result;
 }
 
-double root(operand01) {
+double root(double operand01) {
   double result = sqrt(operand01);
   return result;
 }
 
-void terminalColors() {
-  String Color = "\u001B[";
-  String LETTERS_BLACK = Color + "30m";
-  //String LETTERS_ERROR = Color + "31m"; // Color Red
-  //String BACKGROUND_YELLOW = Color + "33m";
-  String BACKGROUND_WHITE = Color + "47m";
-  print(BACKGROUND_WHITE + LETTERS_BLACK);
+Map<String, String> terminalColors(String letterColor, String backgroundColor) {
+  String colorPrefix = '\u001B[';
+
+  switch (letterColor) {
+    case 'black':
+      letterColor = '30m';
+    case 'white':
+      letterColor = '37m';
+    case 'red':
+      letterColor = '31m';
+    case 'blue':
+      letterColor = '34m';
+    case 'green':
+      letterColor = '32m';
+    default:
+      letterColor = '30m';
+  }
+
+  switch (backgroundColor) {
+    case 'black':
+      backgroundColor = '40m';
+    case 'white':
+      backgroundColor = '47m';
+    case 'red':
+      backgroundColor = '41m';
+    case 'blue':
+      backgroundColor = '44m';
+    case 'green':
+      backgroundColor = '42m';
+    default:
+      backgroundColor = '40m';
+  }
+
+  letterColor = colorPrefix + letterColor;
+  backgroundColor = colorPrefix + backgroundColor;
+
+  return {'letterColor': letterColor, 'backgroundColor': backgroundColor};
 }
