@@ -15,6 +15,8 @@ void calculator() {
     2: 'Subtraktion',
     3: 'Multiplikation',
     4: 'Division',
+    5: 'Modulo', // to Do: unzulässig für Fließkommazahlen (nur in C? -> checken)
+    6: 'Quadratwurzel',
   };
 
   Map<int, List<String>> calcOperands = {
@@ -22,10 +24,13 @@ void calculator() {
     2: ['Minuend', 'Subtrahend'],
     3: ['Multiplikator', 'Multiplikand'],
     4: ['Dividend', 'Divisor'],
+    5: ['Dividend', 'Divisor'],
+    6: ['Radikand', ''],
   };
 
   print(
-    '\n' + 'Dein Taschenrechner - Wähle eine Rechenart mit einer Ziffer aus:',
+    '\n' +
+        'Dein Taschenrechner - Wähle eine Rechenart aus der Liste anhand ihrer Ziffer:',
   );
   print('- - - - - - - - - -');
   print('Addition = 1');
@@ -41,7 +46,12 @@ void calculator() {
   print('\n' + 'Du hast ${calcTypes[calculus]} als Rechenart gewählt.');
 
   // Eingabe der Zahlen
-  print('\n' + 'Gib die erste Zahl (${calcOperands[calculus]?.first}) ein:');
+  print(
+    '\n' +
+        'Gib die ' +
+        '${calculus != 6 ? 'erste ' : ''}' +
+        'Zahl (${calcOperands[calculus]?.first}) ein:',
+  );
   operand01 = double.parse(stdin.readLineSync() ?? '0');
 
   if (calculus != 6) {
@@ -67,7 +77,7 @@ void calculator() {
   }
   print('\n' + '- - - Das Ergebnis - - -');
   print('\n' + '$result');
-  print('\n' + '- - - - - -');
+  print('\n' + '- - - - - -' + '\n');
 }
 
 double addition(operand01, operand02) {
