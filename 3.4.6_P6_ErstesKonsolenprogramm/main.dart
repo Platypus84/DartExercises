@@ -35,12 +35,9 @@ void calculator() {
         ' Dein Taschenrechner - Wähle eine Rechenart aus der Liste anhand ihrer Ziffer:',
   );
   print(' - - - - - - - - - -');
-  print('  Addition = 1');
-  print('  Subtraktion = 2');
-  print('  Multiplikation = 3');
-  print('  Division = 4');
-  print('  Modulo = 5');
-  print('  Quadratwurzel = 6');
+  calcTypes.forEach((key, value) {
+    print(' $value = $key');
+  });
   print(' - - - - - - - - - -' + '\n');
   int calculus = int.parse(stdin.readLineSync() ?? '0');
 
