@@ -44,61 +44,66 @@ void calculator() {
   print(' - - - - - - - - - -' + '\n');
   int calculus = int.parse(stdin.readLineSync() ?? '0');
 
-  if (!allowedNumbers.contains(calculus)) {
+  while (!allowedNumbers.contains(calculus)) {
     print(
       '\u001B[31m' +
-          'Fehler: Für die Ziffer' +
-          '$calculus existiert keine Rechenart!' +
+          'FEHLER: Für die Ziffer $calculus existiert keine Rechenart!' +
           '\n',
     );
-  } else {
-    // Ausgabe der gewählten Rechenart
     print(
       '\n' +
-          ' Du hast ' +
-          '\u001b[34m' +
-          '${calcTypes[calculus]}' +
           '\u001b[30m' +
-          ' als Rechenart gewählt.',
+          ' Gib eine korrekte Ziffer aus dem obigen Menü ein:',
     );
+    calculus = int.parse(stdin.readLineSync() ?? '0');
+  }
 
-    // Eingabe der Zahlen
+  // Ausgabe der gewählten Rechenart
+  print(
+    '\n' +
+        ' Du hast ' +
+        '\u001b[34m' +
+        '${calcTypes[calculus]}' +
+        '\u001b[30m' +
+        ' als Rechenart gewählt.',
+  );
+
+  // Eingabe der Zahlen
+  print(
+    '\n' +
+        ' Gib die ' +
+        '${calculus != 6 ? 'erste ' : ''}' +
+        'Zahl (${calcOperands[calculus]?.first}) ein:',
+  );
+  operand01 = double.parse(stdin.readLineSync() ?? '0');
+
+  if (calculus != 6) {
     print(
       '\n' +
-          ' Gib die ' +
-          '${calculus != 6 ? 'erste ' : ''}' +
-          'Zahl (${calcOperands[calculus]?.first}) ein:',
+          ' Gib die zweite Zahl (${calcOperands[calculus]?.last}) ein:', // To Do: Regex zur Prüfung, dass nur Zahlen eingegeben werden!
     );
-    operand01 = double.parse(stdin.readLineSync() ?? '0');
-
-    if (calculus != 6) {
-      print(
-        '\n' +
-            ' Gib die zweite Zahl (${calcOperands[calculus]?.last}) ein:', // To Do: Regex zur Prüfung, dass nur Zahlen eingegeben werden!
-      );
-      operand02 = double.parse(stdin.readLineSync() ?? '0');
-    }
-
-    switch (calculus) {
-      case 1:
-        result = addition(operand01, operand02);
-      case 2:
-        result = subtraction(operand01, operand02);
-      case 3:
-        result = multiplication(operand01, operand02);
-      case 4:
-        result = division(operand01, operand02);
-      case 5:
-        result = modulo(operand01, operand02);
-      case 6:
-        result = root(operand01);
-      default:
-        print(' Fehler: Keine Rechenart gewählt');
-    }
-    print('\n' + '- - - Das Ergebnis - - -');
-    print('\n' + '\u001b[32m' + ' $result' + '\u001b[30m');
-    print('\n' + '- - - - - -' + '\n');
+    operand02 = double.parse(stdin.readLineSync() ?? '0');
   }
+
+  switch (calculus) {
+    case 1:
+      result = addition(operand01, operand02);
+    case 2:
+      result = subtraction(operand01, operand02);
+    case 3:
+      result = multiplication(operand01, operand02);
+    case 4:
+      result = division(operand01, operand02);
+    case 5:
+      result = modulo(operand01, operand02);
+    case 6:
+      result = root(operand01);
+    default:
+      print(' Fehler: Keine Rechenart gewählt');
+  }
+  print('\n' + '- - - Das Ergebnis - - -');
+  print('\n' + '\u001b[32m' + ' $result' + '\u001b[30m');
+  print('\n' + '- - - - - - - - - - - - ' + '\n');
 }
 
 double addition(operand01, operand02) {
@@ -134,8 +139,8 @@ double root(operand01) {
 void terminalColors() {
   String Color = "\u001B[";
   String LETTERS_BLACK = Color + "30m";
-  String LETTERS_ERROR = Color + "31m"; // Color Red
-  String BACKGROUND_YELLOW = Color + "33m";
+  //String LETTERS_ERROR = Color + "31m"; // Color Red
+  //String BACKGROUND_YELLOW = Color + "33m";
   String BACKGROUND_WHITE = Color + "47m";
   print(BACKGROUND_WHITE + LETTERS_BLACK);
 }
