@@ -9,6 +9,7 @@ void calculator() {
   late double operand01;
   late double operand02;
   late double result;
+  List<int> allowedNumbers = [1, 2, 3, 4, 5, 6];
 
   Map<int, String> calcTypes = {
     1: 'Addition',
@@ -42,42 +43,48 @@ void calculator() {
   print('- - - - - - - - - -' + '\n');
   int calculus = int.parse(stdin.readLineSync() ?? '0');
 
-  // Ausgabe der gewählten Rechenart
-  print('\n' + 'Du hast ${calcTypes[calculus]} als Rechenart gewählt.');
+  if (!allowedNumbers.contains(calculus)) {
+    print('Fehler: Für die Ziffer $calculus existiert keine Rechenart!' + '\n');
+  } else {
+    // Ausgabe der gewählten Rechenart
+    print('\n' + 'Du hast ${calcTypes[calculus]} als Rechenart gewählt.');
 
-  // Eingabe der Zahlen
-  print(
-    '\n' +
-        'Gib die ' +
-        '${calculus != 6 ? 'erste ' : ''}' +
-        'Zahl (${calcOperands[calculus]?.first}) ein:',
-  );
-  operand01 = double.parse(stdin.readLineSync() ?? '0');
+    // Eingabe der Zahlen
+    print(
+      '\n' +
+          'Gib die ' +
+          '${calculus != 6 ? 'erste ' : ''}' +
+          'Zahl (${calcOperands[calculus]?.first}) ein:',
+    );
+    operand01 = double.parse(stdin.readLineSync() ?? '0');
 
-  if (calculus != 6) {
-    print('\n' + 'Gib die zweite Zahl (${calcOperands[calculus]?.last}) ein:');
-    operand02 = double.parse(stdin.readLineSync() ?? '0');
+    if (calculus != 6) {
+      print(
+        '\n' + 'Gib die zweite Zahl (${calcOperands[calculus]?.last}) ein:',
+      );
+      operand02 = double.parse(stdin.readLineSync() ?? '0');
+    }
+
+    switch (calculus) {
+      case 1:
+        result = addition(operand01, operand02);
+      case 2:
+        result = subtraction(operand01, operand02);
+      case 3:
+        result = multiplication(operand01, operand02);
+      case 4:
+        result = division(operand01, operand02);
+      case 5:
+        result = modulo(operand01, operand02);
+      case 6:
+        result = root(operand01);
+      default:
+        print('Fehler: Keine Rechenart gewählt');
+    }
+    print('\n' + '- - - Das Ergebnis - - -');
+    print('\n' + '$result');
+    print('\n' + '- - - - - -' + '\n');
   }
-
-  switch (calculus) {
-    case 1:
-      result = addition(operand01, operand02);
-    case 2:
-      result = subtraction(operand01, operand02);
-    case 3:
-      result = multiplication(operand01, operand02);
-    case 4:
-      result = division(operand01, operand02);
-    case 5:
-      result = modulo(operand01, operand02);
-    case 6:
-      result = root(operand01);
-    default:
-      print('Fehler: Keine Rechenart gewählt');
-  }
-  print('\n' + '- - - Das Ergebnis - - -');
-  print('\n' + '$result');
-  print('\n' + '- - - - - -' + '\n');
 }
 
 double addition(operand01, operand02) {
