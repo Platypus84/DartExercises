@@ -81,55 +81,31 @@ void calculator() {
         'Zahl (${calcOperands[calculus]?.first}) ein:',
   );
   operand01 = double.tryParse(stdin.readLineSync() ?? '0');
-  while (operand01 == null) {
-    print('\n');
-    print(
-      '\u001B[31m' +
-          ' FEHLER: Die Eingabe' +
-          '\u001B[34m' +
-          ' $operand01 ' +
-          '\u001B[31m' +
-          'ist keine Zahl!',
-    );
-    print('\u001b[30m' + ' Gib eine Zahl ein:');
-    operand01 = double.tryParse(stdin.readLineSync() ?? '0');
-  }
+  operand01 = checkInput(operand01);
 
   // Eingabe von Operand 2 für Berechnungen, die 2.Operanden benötigen
   if (calculus != 6) {
     print('\n' + ' Gib die zweite Zahl (${calcOperands[calculus]?.last}) ein:');
     operand02 = double.tryParse(stdin.readLineSync() ?? '0');
-    while (operand02 == null) {
-      print('\n');
-      print(
-        '\u001B[31m' +
-            ' FEHLER: Die Eingabe' +
-            '\u001B[34m' +
-            ' $operand02 ' +
-            '\u001B[31m' +
-            'ist keine Zahl!',
-      );
-      print('\u001b[30m' + ' Gib eine Zahl ein:');
-      operand02 = double.tryParse(stdin.readLineSync() ?? '0');
-    }
+    operand02 = checkInput(operand02);
   }
 
   // Verarbeitung der Operanden je nach Rechenart:
   switch (calculus) {
     case 1:
-      result = addition(operand01!, operand02!);
+      result = addition(operand01, operand02!);
     case 2:
-      result = subtraction(operand01!, operand02!);
+      result = subtraction(operand01, operand02!);
     case 3:
-      result = multiplication(operand01!, operand02!);
+      result = multiplication(operand01, operand02!);
     case 4:
-      result = division(operand01!, operand02!);
+      result = division(operand01, operand02!);
     case 5:
-      result = modulo(operand01!, operand02!);
+      result = modulo(operand01, operand02!);
     case 6:
-      result = root(operand01!);
+      result = root(operand01);
     case 7:
-      result = power(operand01!, operand02!);
+      result = power(operand01, operand02!);
     default:
       print(' Fehler: Keine Rechenart gewählt');
   }
@@ -221,10 +197,21 @@ double power(double operand01, double operand02) {
   return result;
 }
 
-checkInput() {
-  int? number = int.tryParse(stdin.readLineSync() ?? '0');
-  var result = number != null ? number : false;
-  return result;
+double checkInput(double? operand) {
+  while (operand == null) {
+    print('\n');
+    print(
+      '\u001B[31m' +
+          ' FEHLER: Die Eingabe' +
+          '\u001B[34m' +
+          ' $operand ' +
+          '\u001B[31m' +
+          'ist keine Zahl!',
+    );
+    print('\u001b[30m' + ' Gib eine Zahl ein:');
+    operand = double.tryParse(stdin.readLineSync() ?? '0');
+  }
+  return operand;
 }
 
 Map<String, String> terminalColors(String letterColor, String backgroundColor) {
