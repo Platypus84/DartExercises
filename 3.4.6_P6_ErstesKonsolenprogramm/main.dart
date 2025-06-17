@@ -9,8 +9,8 @@ void calculator() {
   // Variablen:
   Map calcBaseColors = terminalColors('black', 'white');
   print(calcBaseColors['letterColor'] + calcBaseColors['backgroundColor']);
-  late double operand01;
-  late double operand02;
+  late double? operand01;
+  late double? operand02;
   late double result;
 
   Map<int, String> calcTypes = {
@@ -46,20 +46,21 @@ void calculator() {
 
   // Eingabe der Rechenart mit Prüfung, ob Eingabe null  Info: .tryParse() ist prüfbar und hat 'null' als Rückgabewert, wenn Parsing fehlschlägt, .parse wirft als Rückgabewert lediglich "Unhandled exception: FormatException: Invalid radix-10 number", wenn Parsing fehlschlägt.
   int? calculus = int.tryParse(stdin.readLineSync() ?? '0');
+  // var calculus = checkInput();
 
   // Prüfung Eingabewert für Rechenart:
   while (!calcTypes.keys.contains(calculus) || calculus == null) {
+    print('\n');
     print(
       '\u001B[31m' +
           ' FEHLER: Für die Ziffer/Eingabe' +
           '\u001B[34m' +
           ' $calculus ' +
           '\u001B[31m' +
-          'existiert keine Rechenart!' +
-          '\n',
+          'existiert keine Rechenart!',
     );
-    print('\u001b[30m' + ' Gib eine korrekte Ziffer aus dem obigen Menü ein:');
-    calculus = int.parse(stdin.readLineSync() ?? '0');
+    print('\u001b[30m' + ' Gib eine korrekte Ziffer (aus obigem Menü) ein:');
+    calculus = int.tryParse(stdin.readLineSync() ?? '0');
   }
 
   // Ausgabe der gewählten Rechenart:
@@ -79,34 +80,56 @@ void calculator() {
         '${calculus != 6 ? 'erste ' : ''}' +
         'Zahl (${calcOperands[calculus]?.first}) ein:',
   );
-  operand01 = double.parse(
-    stdin.readLineSync() ?? '0',
-  ); // To Do: Auf falsche Eingabewerte prüfen
+  operand01 = double.tryParse(stdin.readLineSync() ?? '0');
+  while (operand01 == null) {
+    print('\n');
+    print(
+      '\u001B[31m' +
+          ' FEHLER: Die Eingabe' +
+          '\u001B[34m' +
+          ' $operand01 ' +
+          '\u001B[31m' +
+          'ist keine Zahl!',
+    );
+    print('\u001b[30m' + ' Gib eine Zahl ein:');
+    operand01 = double.tryParse(stdin.readLineSync() ?? '0');
+  }
 
   // Eingabe von Operand 2 für Berechnungen, die 2.Operanden benötigen
   if (calculus != 6) {
     print('\n' + ' Gib die zweite Zahl (${calcOperands[calculus]?.last}) ein:');
-    operand02 = double.parse(
-      stdin.readLineSync() ?? '0',
-    ); // To Do: Auf falsche Eingabewerte prüfen
+    operand02 = double.tryParse(stdin.readLineSync() ?? '0');
+    while (operand02 == null) {
+      print('\n');
+      print(
+        '\u001B[31m' +
+            ' FEHLER: Die Eingabe' +
+            '\u001B[34m' +
+            ' $operand02 ' +
+            '\u001B[31m' +
+            'ist keine Zahl!',
+      );
+      print('\u001b[30m' + ' Gib eine Zahl ein:');
+      operand02 = double.tryParse(stdin.readLineSync() ?? '0');
+    }
   }
 
   // Verarbeitung der Operanden je nach Rechenart:
   switch (calculus) {
     case 1:
-      result = addition(operand01, operand02);
+      result = addition(operand01!, operand02!);
     case 2:
-      result = subtraction(operand01, operand02);
+      result = subtraction(operand01!, operand02!);
     case 3:
-      result = multiplication(operand01, operand02);
+      result = multiplication(operand01!, operand02!);
     case 4:
-      result = division(operand01, operand02);
+      result = division(operand01!, operand02!);
     case 5:
-      result = modulo(operand01, operand02);
+      result = modulo(operand01!, operand02!);
     case 6:
-      result = root(operand01);
+      result = root(operand01!);
     case 7:
-      result = power(operand01, operand02);
+      result = power(operand01!, operand02!);
     default:
       print(' Fehler: Keine Rechenart gewählt');
   }
@@ -198,9 +221,11 @@ double power(double operand01, double operand02) {
   return result;
 }
 
-// bool isNumeric(String str) {
-//   return _numeric.hasMatch(str);
-// }
+checkInput() {
+  int? number = int.tryParse(stdin.readLineSync() ?? '0');
+  var result = number != null ? number : false;
+  return result;
+}
 
 Map<String, String> terminalColors(String letterColor, String backgroundColor) {
   String colorPrefix = '\u001B[';
