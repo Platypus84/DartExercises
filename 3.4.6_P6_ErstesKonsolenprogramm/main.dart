@@ -7,19 +7,18 @@ void main() {
 
 void calculator() {
   // Variablen:
+  Map calcBaseColors = terminalColors('black', 'white');
+  print(calcBaseColors['letterColor'] + calcBaseColors['backgroundColor']);
   late double operand01;
   late double operand02;
   late double result;
-  List<int> allowedNumbers = [1, 2, 3, 4, 5, 6, 7];
-  Map calcBaseColors = terminalColors('black', 'white');
-  print(calcBaseColors['letterColor'] + calcBaseColors['backgroundColor']);
 
   Map<int, String> calcTypes = {
     1: 'Addition',
     2: 'Subtraktion',
     3: 'Multiplikation',
     4: 'Division',
-    5: 'Modulo', // to Do: unzulässig für Fließkommazahlen (nur in C? -> checken)
+    5: 'Modulo', // to Do: unzulässig für Fließkommazahlen? / nur in C? -> checken)
     6: 'Quadratwurzel',
     7: 'Potenz',
   };
@@ -44,20 +43,22 @@ void calculator() {
     print(' $value = $key');
   });
   print(' - - - - - - - - - -' + '\n');
-  int calculus = int.parse(stdin.readLineSync() ?? '0');
 
-  // Prüfung Eingabewert:
-  while (!allowedNumbers.contains(calculus)) {
+  // Eingabe der Rechenart mit Prüfung, ob Eingabe null  Info: .tryParse() ist prüfbar und hat 'null' als Rückgabewert, wenn Parsing fehlschlägt, .parse wirft als Rückgabewert lediglich "Unhandled exception: FormatException: Invalid radix-10 number", wenn Parsing fehlschlägt.
+  int? calculus = int.tryParse(stdin.readLineSync() ?? '0');
+
+  // Prüfung Eingabewert für Rechenart:
+  while (!calcTypes.keys.contains(calculus) || calculus == null) {
     print(
       '\u001B[31m' +
-          'FEHLER: Für die Ziffer $calculus existiert keine Rechenart!' +
+          ' FEHLER: Für die Ziffer/Eingabe' +
+          '\u001B[34m' +
+          ' $calculus ' +
+          '\u001B[31m' +
+          'existiert keine Rechenart!' +
           '\n',
     );
-    print(
-      '\n' +
-          '\u001b[30m' +
-          ' Gib eine korrekte Ziffer aus dem obigen Menü ein:',
-    );
+    print('\u001b[30m' + ' Gib eine korrekte Ziffer aus dem obigen Menü ein:');
     calculus = int.parse(stdin.readLineSync() ?? '0');
   }
 
@@ -71,21 +72,23 @@ void calculator() {
         ' als Rechenart gewählt.',
   );
 
-  // Eingabe der Operanden:
+  // Eingabe von Operand 1:
   print(
     '\n' +
         ' Gib die ' +
         '${calculus != 6 ? 'erste ' : ''}' +
         'Zahl (${calcOperands[calculus]?.first}) ein:',
   );
-  operand01 = double.parse(stdin.readLineSync() ?? '0');
+  operand01 = double.parse(
+    stdin.readLineSync() ?? '0',
+  ); // To Do: Auf falsche Eingabewerte prüfen
 
+  // Eingabe von Operand 2 für Berechnungen, die 2.Operanden benötigen
   if (calculus != 6) {
-    print(
-      '\n' +
-          ' Gib die zweite Zahl (${calcOperands[calculus]?.last}) ein:', // To Do: Regex zur Prüfung, dass nur Zahlen für Operande 1 und 2 eingegeben werden!
-    );
-    operand02 = double.parse(stdin.readLineSync() ?? '0');
+    print('\n' + ' Gib die zweite Zahl (${calcOperands[calculus]?.last}) ein:');
+    operand02 = double.parse(
+      stdin.readLineSync() ?? '0',
+    ); // To Do: Auf falsche Eingabewerte prüfen
   }
 
   // Verarbeitung der Operanden je nach Rechenart:
@@ -113,8 +116,11 @@ void calculator() {
   print('\n' + '\u001b[32m' + ' $result' + '\u001b[30m');
   print('\n' + '- - - - - - - - - - - - ' + '\n');
 
+  // Eingabe zum Weiterrechnen:
   print(' Möchtest du weiterrechnen? (Ja = 1 / Nein = 0)');
-  int continueCalc = int.parse(stdin.readLineSync() ?? '0');
+  int continueCalc = int.parse(
+    stdin.readLineSync() ?? '0',
+  ); // To Do: Auf falsche Eingabewerte prüfen
 
   if (continueCalc == 1) {
     print(
@@ -125,7 +131,11 @@ void calculator() {
           '\u001b[30m' +
           ') weiterrechnen? (Ja = 1 / Nein = 0)',
     );
-    int saveNumber = int.parse(stdin.readLineSync() ?? '0');
+
+    int saveNumber = int.parse(
+      stdin.readLineSync() ?? '0',
+    ); // To Do: Auf falsche Eingabewerte prüfen
+
     if (saveNumber == 1) {
       print(
         '\n' +
@@ -135,7 +145,11 @@ void calculator() {
             '\u001b[30m' +
             ' als 1.Operand oder 2.Operand weiterrechnen? (1.Operand = 1 / 2.Operand = 2)',
       );
-      int chosenNumber = int.parse(stdin.readLineSync() ?? '0');
+
+      int chosenNumber = int.parse(
+        stdin.readLineSync() ?? '0',
+      ); // To Do: Auf falsche Eingabewerte prüfen
+
       if (chosenNumber == 1) {
         operand01 = result;
         operand02 = 0;
@@ -183,6 +197,10 @@ double power(double operand01, double operand02) {
   double result = pow(operand01, operand02).toDouble();
   return result;
 }
+
+// bool isNumeric(String str) {
+//   return _numeric.hasMatch(str);
+// }
 
 Map<String, String> terminalColors(String letterColor, String backgroundColor) {
   String colorPrefix = '\u001B[';
