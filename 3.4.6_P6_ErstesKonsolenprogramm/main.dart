@@ -10,7 +10,7 @@ void calculator() {
   late double operand01;
   late double operand02;
   late double result;
-  List<int> allowedNumbers = [1, 2, 3, 4, 5, 6];
+  List<int> allowedNumbers = [1, 2, 3, 4, 5, 6, 7];
   Map calcBaseColors = terminalColors('black', 'white');
   print(calcBaseColors['letterColor'] + calcBaseColors['backgroundColor']);
 
@@ -21,6 +21,7 @@ void calculator() {
     4: 'Division',
     5: 'Modulo', // to Do: unzulässig für Fließkommazahlen (nur in C? -> checken)
     6: 'Quadratwurzel',
+    7: 'Potenz',
   };
 
   Map<int, List<String>> calcOperands = {
@@ -30,6 +31,7 @@ void calculator() {
     4: ['Dividend', 'Divisor'],
     5: ['Dividend', 'Divisor'],
     6: ['Radikand', ''],
+    7: ['Basis', 'Exponent'],
   };
 
   // Ausgabe Taschenrechner Funktionsmenü:
@@ -100,6 +102,8 @@ void calculator() {
       result = modulo(operand01, operand02);
     case 6:
       result = root(operand01);
+    case 7:
+      result = power(operand01, operand02);
     default:
       print(' Fehler: Keine Rechenart gewählt');
   }
@@ -108,6 +112,16 @@ void calculator() {
   print('\n' + '- - - Das Ergebnis - - -');
   print('\n' + '\u001b[32m' + ' $result' + '\u001b[30m');
   print('\n' + '- - - - - - - - - - - - ' + '\n');
+
+  print(' Möchtest du weiterrechnen? (Ja = 1 / Nein = 2)');
+  int continueCalc = int.parse(stdin.readLineSync() ?? '0');
+
+  if (continueCalc == 1) {
+    print(
+      '\n' +
+          ' Möchtest du mit dem vorigen Ergebnis ($result) weiterrechnen? (Ja = 1 / Nein = 2)',
+    );
+  }
 }
 
 double addition(double operand01, double operand02) {
@@ -137,6 +151,11 @@ double modulo(double operand01, double operand02) {
 
 double root(double operand01) {
   double result = sqrt(operand01);
+  return result;
+}
+
+double power(double operand01, double operand02) {
+  double result = pow(operand01, operand02).toDouble();
   return result;
 }
 
