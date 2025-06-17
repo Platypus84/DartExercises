@@ -113,14 +113,39 @@ void calculator() {
   print('\n' + '\u001b[32m' + ' $result' + '\u001b[30m');
   print('\n' + '- - - - - - - - - - - - ' + '\n');
 
-  print(' Möchtest du weiterrechnen? (Ja = 1 / Nein = 2)');
+  print(' Möchtest du weiterrechnen? (Ja = 1 / Nein = 0)');
   int continueCalc = int.parse(stdin.readLineSync() ?? '0');
 
   if (continueCalc == 1) {
     print(
       '\n' +
-          ' Möchtest du mit dem vorigen Ergebnis ($result) weiterrechnen? (Ja = 1 / Nein = 2)',
+          ' Möchtest du mit dem vorigen Ergebnis (' +
+          '\u001b[34m' +
+          '$result' +
+          '\u001b[30m' +
+          ') weiterrechnen? (Ja = 1 / Nein = 0)',
     );
+    int saveNumber = int.parse(stdin.readLineSync() ?? '0');
+    if (saveNumber == 1) {
+      print(
+        '\n' +
+            ' Möchtest du mit ' +
+            '\u001b[34m' +
+            '$result' +
+            '\u001b[30m' +
+            ' als 1.Operand oder 2.Operand weiterrechnen? (1.Operand = 1 / 2.Operand = 2)',
+      );
+      int chosenNumber = int.parse(stdin.readLineSync() ?? '0');
+      if (chosenNumber == 1) {
+        operand01 = result;
+        operand02 = 0;
+      } else {
+        operand01 = 0;
+        operand02 = result;
+      }
+    } else {} // To Do: Hauptmenü aufrufen
+  } else {
+    print('Bis bald!');
   }
 }
 
