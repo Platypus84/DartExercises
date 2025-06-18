@@ -10,7 +10,7 @@ void calculator() {
   Map calcBaseColors = terminalColors('black', 'white');
   print(calcBaseColors['letterColor'] + calcBaseColors['backgroundColor']);
   late double? operand01;
-  late double? operand02;
+  double? operand02 = 0;
   late double result;
   late int? continueCalc;
   late int? saveResult;
@@ -67,12 +67,12 @@ void calculator() {
   );
 
   operand01 = inputOperand(1, calculus);
+
   if (calculus != 6) {
     operand02 = inputOperand(2, calculus);
   }
-
   // Verarbeitung der Operanden je nach Rechenart:
-  result = calculate(operand01!, operand02 = 0, calculus);
+  result = calculate(operand01!, operand02!, calculus);
 
   // Ausgabe des Rechenergebnisses:
   print('\n' + '- - - Das Ergebnis - - -');
