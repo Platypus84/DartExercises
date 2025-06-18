@@ -26,16 +26,6 @@ void calculator() {
     7: 'Potenz',
   };
 
-  Map<int, List<String>> calcOperands = {
-    1: ['Summand 1', 'Summand 2'],
-    2: ['Minuend', 'Subtrahend'],
-    3: ['Multiplikator', 'Multiplikand'],
-    4: ['Dividend', 'Divisor'],
-    5: ['Dividend', 'Divisor'],
-    6: ['Radikand', ''],
-    7: ['Basis', 'Exponent'],
-  };
-
   // Ausgabe Taschenrechner Funktionsmenü:
   print(
     '\n' +
@@ -76,27 +66,13 @@ void calculator() {
         ' als Rechenart gewählt.',
   );
 
-  // Eingabe von Operand 1:
-  print(
-    '\n' +
-        ' Gib die ' +
-        '${calculus != 6 ? 'erste ' : ''}' +
-        'Zahl (${calcOperands[calculus]?.first}) ein:',
-  );
-  operand01 = double.tryParse(stdin.readLineSync() ?? '0');
-  operand01 = checkInput(operand01, double);
-
-  // Eingabe von Operand 2 für Berechnungen, die 2.Operanden benötigen
+  operand01 = inputOperand(1, calculus);
   if (calculus != 6) {
-    print('\n' + ' Gib die zweite Zahl (${calcOperands[calculus]?.last}) ein:');
-    operand02 = double.tryParse(stdin.readLineSync() ?? '0');
-    operand02 = checkInput(operand02, double);
-  } else {
-    operand02 = 0;
+    operand02 = inputOperand(2, calculus);
   }
 
   // Verarbeitung der Operanden je nach Rechenart:
-  result = calculate(operand01!, operand02!, calculus);
+  result = calculate(operand01!, operand02 = 0, calculus);
 
   // Ausgabe des Rechenergebnisses:
   print('\n' + '- - - Das Ergebnis - - -');
@@ -147,13 +123,40 @@ void calculator() {
   }
 }
 
+double? inputOperand(int operandNumber, int calculus) {
+  Map<int, List<String>> calcOperands = {
+    1: ['Summand 1', 'Summand 2'],
+    2: ['Minuend', 'Subtrahend'],
+    3: ['Multiplikator', 'Multiplikand'],
+    4: ['Dividend', 'Divisor'],
+    5: ['Dividend', 'Divisor'],
+    6: ['Radikand', ''],
+    7: ['Basis', 'Exponent'],
+  };
+  String? operandName = operandNumber == 1
+      ? calcOperands[calculus]?.first
+      : calcOperands[calculus]?.last;
+  print(
+    '\n' +
+        ' Gib die ' +
+        '${(operandNumber == 1)
+            ? calculus != 6
+                  ? 'erste '
+                  : ''
+            : (operandNumber == 2 ? 'zweite ' : '')}' +
+        'Zahl ($operandName) ein!',
+  );
+  double? operand = double.tryParse(stdin.readLineSync() ?? '0');
+  operand = checkInput(operand, double);
+  return operand;
+}
+
 double calculate(double operand01, double operand02, int calcType) {
   late double result;
   switch (calcType) {
     case 1:
       result = operand01 + operand02;
     case 2:
-      print('pups');
       result = operand01 - operand02;
     case 3:
       result = operand01 * operand02;
