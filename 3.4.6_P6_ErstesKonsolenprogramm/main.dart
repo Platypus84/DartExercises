@@ -12,6 +12,9 @@ void calculator() {
   late double? operand01;
   late double? operand02;
   late double result;
+  late int? continueCalc;
+  late int? saveResult;
+  late double? chosenNumber;
 
   Map<int, String> calcTypes = {
     1: 'Addition',
@@ -44,9 +47,9 @@ void calculator() {
   });
   print(' - - - - - - - - - -' + '\n');
 
-  // Eingabe der Rechenart mit Prüfung, ob Eingabe null  Info: .tryParse() ist prüfbar und hat 'null' als Rückgabewert, wenn Parsing fehlschlägt, .parse wirft als Rückgabewert lediglich "Unhandled exception: FormatException: Invalid radix-10 number", wenn Parsing fehlschlägt.
+  // Eingabe der Rechenart mit Prüfung, ob Eingabe null
+  // Note to self: .tryParse() ist prüfbar und hat 'null' als Rückgabewert, wenn Parsing fehlschlägt, .parse wirft als Rückgabewert lediglich "Unhandled exception: FormatException: Invalid radix-10 number", wenn Parsing fehlschlägt.
   int? calculus = int.tryParse(stdin.readLineSync() ?? '0');
-  // var calculus = checkInput();
 
   // Prüfung Eingabewert für Rechenart:
   while (!calcTypes.keys.contains(calculus) || calculus == null) {
@@ -81,34 +84,19 @@ void calculator() {
         'Zahl (${calcOperands[calculus]?.first}) ein:',
   );
   operand01 = double.tryParse(stdin.readLineSync() ?? '0');
-  operand01 = checkInput(operand01);
+  operand01 = checkInput(operand01, double);
 
   // Eingabe von Operand 2 für Berechnungen, die 2.Operanden benötigen
   if (calculus != 6) {
     print('\n' + ' Gib die zweite Zahl (${calcOperands[calculus]?.last}) ein:');
     operand02 = double.tryParse(stdin.readLineSync() ?? '0');
-    operand02 = checkInput(operand02);
+    operand02 = checkInput(operand02, double);
+  } else {
+    operand02 = 0;
   }
 
   // Verarbeitung der Operanden je nach Rechenart:
-  switch (calculus) {
-    case 1:
-      result = addition(operand01, operand02!);
-    case 2:
-      result = subtraction(operand01, operand02!);
-    case 3:
-      result = multiplication(operand01, operand02!);
-    case 4:
-      result = division(operand01, operand02!);
-    case 5:
-      result = modulo(operand01, operand02!);
-    case 6:
-      result = root(operand01);
-    case 7:
-      result = power(operand01, operand02!);
-    default:
-      print(' Fehler: Keine Rechenart gewählt');
-  }
+  result = calculate(operand01!, operand02!, calculus);
 
   // Ausgabe des Rechenergebnisses:
   print('\n' + '- - - Das Ergebnis - - -');
@@ -117,9 +105,8 @@ void calculator() {
 
   // Eingabe zum Weiterrechnen:
   print(' Möchtest du weiterrechnen? (Ja = 1 / Nein = 0)');
-  int continueCalc = int.parse(
-    stdin.readLineSync() ?? '0',
-  ); // To Do: Auf falsche Eingabewerte prüfen
+  continueCalc = int.tryParse(stdin.readLineSync() ?? '0');
+  continueCalc = checkInput(continueCalc, int);
 
   if (continueCalc == 1) {
     print(
@@ -131,11 +118,10 @@ void calculator() {
           ') weiterrechnen? (Ja = 1 / Nein = 0)',
     );
 
-    int saveNumber = int.parse(
-      stdin.readLineSync() ?? '0',
-    ); // To Do: Auf falsche Eingabewerte prüfen
+    saveResult = int.tryParse(stdin.readLineSync() ?? '0');
+    saveResult = checkInput(saveResult, int);
 
-    if (saveNumber == 1) {
+    if (saveResult == 1) {
       print(
         '\n' +
             ' Möchtest du mit ' +
@@ -145,9 +131,8 @@ void calculator() {
             ' als 1.Operand oder 2.Operand weiterrechnen? (1.Operand = 1 / 2.Operand = 2)',
       );
 
-      int chosenNumber = int.parse(
-        stdin.readLineSync() ?? '0',
-      ); // To Do: Auf falsche Eingabewerte prüfen
+      chosenNumber = double.tryParse(stdin.readLineSync() ?? '0');
+      chosenNumber = checkInput(chosenNumber, double);
 
       if (chosenNumber == 1) {
         operand01 = result;
@@ -162,42 +147,30 @@ void calculator() {
   }
 }
 
-double addition(double operand01, double operand02) {
-  double result = operand01 + operand02;
+double calculate(double operand01, double operand02, int calcType) {
+  late double result;
+  switch (calcType) {
+    case 1:
+      result = operand01 + operand02;
+    case 2:
+      print('pups');
+      result = operand01 - operand02;
+    case 3:
+      result = operand01 * operand02;
+    case 4:
+      result = operand01 / operand02;
+    case 5:
+      result = operand01 % operand02;
+    case 6:
+      result = sqrt(operand01);
+    case 7:
+      result = pow(operand01, operand02).toDouble();
+  }
   return result;
 }
 
-double subtraction(double operand01, double operand02) {
-  double result = operand01 - operand02;
-  return result;
-}
-
-double multiplication(double operand01, double operand02) {
-  double result = operand01 * operand02;
-  return result;
-}
-
-double division(double operand01, double operand02) {
-  double result = operand01 / operand02;
-  return result;
-}
-
-double modulo(double operand01, double operand02) {
-  double result = operand01 % operand02;
-  return result;
-}
-
-double root(double operand01) {
-  double result = sqrt(operand01);
-  return result;
-}
-
-double power(double operand01, double operand02) {
-  double result = pow(operand01, operand02).toDouble();
-  return result;
-}
-
-double checkInput(double? operand) {
+checkInput(var operand, var inputType) {
+  // print("Runtime Typ ist ${operand.runtimeType}");
   while (operand == null) {
     print('\n');
     print(
@@ -209,7 +182,11 @@ double checkInput(double? operand) {
           'ist keine Zahl!',
     );
     print('\u001b[30m' + ' Gib eine Zahl ein:');
-    operand = double.tryParse(stdin.readLineSync() ?? '0');
+    if (inputType == double) {
+      operand = double.tryParse(stdin.readLineSync() ?? '0');
+    } else if (inputType == int) {
+      operand = int.tryParse(stdin.readLineSync() ?? '0');
+    }
   }
   return operand;
 }
