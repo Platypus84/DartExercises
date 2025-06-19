@@ -4,10 +4,10 @@ import 'dart:math';
 class Calculator {
   late double? _operand01;
   double? _operand02 = 0;
-  double? _result = null;
+  double? _result;
   late int? _continueCalc;
   late int? _saveResult;
-  double? _chosenNumber = null;
+  double? _chosenNumber;
 
   Map<int, String> _calcTypes = {
     1: 'Addition',
