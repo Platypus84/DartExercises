@@ -35,15 +35,14 @@ void convertMinutesToTime(int inputMinutes) {
 // BONUSAUFGABE 2 - Hauptfunktion ruft Unterfunktionen auf #1:
 
 void printGrades(List<int> grades) {
-  // Gibt alle Noten nacheinander aus
-  // z.B.: Note 1: 2, Note 2: 1, Note 3: 3
+  // Gibt alle Noten nacheinander aus, z.B.: Note 1: 2, Note 2: 1, Note 3: 3
   for (int i = 0; i < grades.length; i++) {
     print('Note ${i + 1}: ${grades[i]}');
   }
 }
 
 void calculateAndPrintAverage(List<int> grades) {
-  // Berechnet den Durchschnitt und gibt aus: "Der Durchschnitt ist: 2.0"
+  // Berechnet den Durchschnitt
   int amountGrades = grades.length;
   int sumGrades = 0;
   for (int i = 0; i < grades.length; i++) {
@@ -57,8 +56,8 @@ void calculateAndPrintAverage(List<int> grades) {
   );
 }
 
-// Hauptfunktion:
 void analyzeGrades(List<int> grades) {
+  // Hauptfunktion, ruft alle anderen aus Bonusaufgabe 2 auf
   printGrades(grades);
   calculateAndPrintAverage(grades);
 }
@@ -117,8 +116,8 @@ void printNumberTypes(List<int> numbers) {
 }
 
 void printDistribution(List<int> numbers) {
-  // Gibt eine einfache Häufigkeitsverteilung aus
-  // z.B. wie oft kommt jede Zahl vor
+  // Gibt eine einfache Häufigkeitsverteilung aus, z.B. wie oft kommt jede Zahl vor
+
   List<String> countedNumbers = [];
 
   for (int number in numbers) {
@@ -132,10 +131,8 @@ void printDistribution(List<int> numbers) {
   print('\n');
 }
 
-// Hauptfunktion:
 void analyzeNumbers(List<int> numbers) {
-  // Ruft alle Funktionen der Reihe nach auf
-  // Gibt eine übersichtliche Gesamtanalyse
+  // Hauptfunktion: Ruft alle Funktionen aus Bonusaufgabe 3 der Reihe nach auf, gibt eine übersichtliche Gesamtanalyse
   print(
     'Gegeben ist die Liste "numbers" mit folgenden Zahlen:' +
         '\n' +
