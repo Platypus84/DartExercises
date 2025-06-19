@@ -18,7 +18,7 @@ void main() {
   analyzeNumbers(numbers);
 }
 
-// BONUSAUFGABE 1 - Convert Minutes To Time:
+// BONUSAUFGABE 1 - Minuten in Stunden umrechnen:
 void convertMinutesToTime(int inputMinutes) {
   int hours = (inputMinutes / 60).toInt();
   int minutes = inputMinutes % 60;
