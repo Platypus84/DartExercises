@@ -34,7 +34,6 @@ void convertMinutesToTime(int inputMinutes) {
 
 // BONUSAUFGABE 2 - Hauptfunktion ruft Unterfunktionen auf #1:
 
-// Erstelle zwei Funktionen:
 void printGrades(List<int> grades) {
   // Gibt alle Noten nacheinander aus
   // z.B.: Note 1: 2, Note 2: 1, Note 3: 3
