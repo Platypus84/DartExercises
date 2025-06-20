@@ -12,7 +12,7 @@ main() {
   print('\n');
 
   print('Aufgabe 3 - Vokale in Wort zählen:');
-  print(countVowls('snnas'));
+  print(countVowls('Ananas'));
   print(countVowls('Simsalabim'));
   print(countVowls('Donaudampfschiffkapitänsmütze'));
   print('\n');
@@ -28,13 +28,14 @@ int countChars(String word) {
   return countChar;
 }
 
-int countVowls(String word) {
+String countVowls(String word) {
   List<String> vowls = ['a', 'ä', 'e', 'i', 'o', 'ö', 'u', 'ü'];
   int sumVowls = 0;
-  for (int i = 0; i < word.length; i++) {
-    if (vowls.contains(word[i])) {
+  String wordLC = word.toLowerCase();
+  for (int i = 0; i < wordLC.length; i++) {
+    if (vowls.contains(wordLC[i])) {
       sumVowls++;
     }
   }
-  return sumVowls;
+  return 'Wort "$word" hat $sumVowls Vokale';
 }
