@@ -5,10 +5,16 @@ main() {
   print(sumNumbers(11, 99, 7));
   print('\n');
 
-  print('Aufgabe 1 - Funktion Anzahl Buchstaben in Wort:');
+  print('Aufgabe 2 - Funktion Anzahl Buchstaben in Wort:');
   print(countChars('Textbeispiel'));
   print(countChars('Sommer'));
   print(countChars('Bliblablub'));
+  print('\n');
+
+  print('Aufgabe 3 - Vokale in Wort zählen:');
+  print(countVowls('snnas'));
+  print(countVowls('Simsalabim'));
+  print(countVowls('Donaudampfschiffkapitänsmütze'));
   print('\n');
 }
 
@@ -20,4 +26,15 @@ int sumNumbers(int num1, int num2, int num3) {
 int countChars(String word) {
   int countChar = word.length;
   return countChar;
+}
+
+int countVowls(String word) {
+  List<String> vowls = ['a', 'ä', 'e', 'i', 'o', 'ö', 'u', 'ü'];
+  int sumVowls = 0;
+  for (int i = 0; i < word.length; i++) {
+    if (vowls.contains(word[i])) {
+      sumVowls++;
+    }
+  }
+  return sumVowls;
 }
