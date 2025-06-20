@@ -2,6 +2,12 @@ main() {
   List<int> numList1 = [34, 57, 1, 100, -45, 2, 7, 12, 73, -17];
   List<int> numList2 = [5, 82, 19, 17];
   List<int> numList3 = [100, -42, 17, 231];
+  List<String> whateverText = [
+    'Kunibert',
+    'fsajoahpha',
+    'Tja da fehlt die Kreativität',
+    '*schnarch*',
+  ];
 
   print('\n' + 'Bonusaufgabe 1 - Zahlenvergleich:');
   print(compareNumbers(2, 10));
@@ -21,7 +27,7 @@ main() {
   print(sumListItems(numList3));
   print('\n');
 
-  print('Bonusaufgabe 4 - Durchschnitt aus Listenzahlen:');
+  print('Bonusaufgabe 4 - Durchschnittswert aus Listenzahlen:');
   print(avgListItems(numList1));
   print(avgListItems(numList2));
   print(avgListItems(numList3));
@@ -36,6 +42,44 @@ main() {
     ),
   );
   print(countSpecificLetterInText('u', 'UUhhuhuhuhuhuhUUUUUUuUuUHhUUhuUu'));
+  print('\n');
+
+  print('Bonusaufgabe 6 - Kommt Buchstabe in Text vor:');
+  print(isSpecificLetterInText('v', 'Das ist ein Testtext'));
+  print(
+    isSpecificLetterInText(
+      'u',
+      'Ganz am Ende steht das U. Und sieh da, noch ein u!',
+    ),
+  );
+  print(
+    isSpecificLetterInText(
+      'ö',
+      'Ööööh, ich verstehe den Sinn nicht so ganz. Höhö',
+    ),
+  );
+  print('\n');
+
+  print('Bonusaufgabe 7 - Zahlchecker: Ist Zahl positiv, negativ, oder 0:');
+  print(numberChecker(7));
+  print(numberChecker(-225));
+  print(numberChecker(0));
+  print('\n');
+
+  print('Bonusaufgabe 8 - Wortbuchstaben einzeln in Liste schreiben:');
+  print(lettersToList('Hallo'));
+  print(lettersToList('Krasser Text!'));
+  print(lettersToList('Juhuuu'));
+  print('\n');
+
+  print('Bonusaufgabe 9 - Anzahl Buchstaben pro String aus Liste mit Strings:');
+  print(letterPerStringToList(whateverText));
+  print('\n');
+
+  print(
+    'Bonusaufgabe 10 - Produkt aus 2 Zahlen, das mit 3.Zahl zusätzlich multipliziert wird:',
+  );
+  print('Das Ergebnis ist: ${multiplyNumbers(9, 5) * 10}');
   print('\n');
 }
 
@@ -62,7 +106,7 @@ sumListItems(List<int> list) {
   return sumItems;
 }
 
-// Bonusaufgabe 4 - Durchschnitt aus Listenzahlen:
+// Bonusaufgabe 4 - Durchschnittswert aus Listenzahlen:
 avgListItems(List<int> list) {
   int sumItems = sumListItems(list);
   int countListItems = list.length;
@@ -79,5 +123,52 @@ String countSpecificLetterInText(String letter, String text) {
       counter++;
     }
   }
-  return 'Der Buchstabe $letter kommt $counter Mal vor.';
+  return counter == 0
+      ? 'Der Buchstabe $letter kommt nicht vor.'
+      : 'Der Buchstabe $letter kommt $counter Mal vor.';
+}
+
+// Bonusaufgabe 6 - Kommt ein Buchstabe im Text vor:
+String isSpecificLetterInText(String letter, String text) {
+  String result = countSpecificLetterInText(letter, text);
+  return result;
+}
+
+// Bonusaufgabe 7 - Zahlchecker: Ist Zahl positiv, negativ, oder 0:
+String numberChecker(int number) {
+  late String result;
+  number == 0
+      ? result = 'Die Zahl $number ist 0.'
+      : number.isNegative
+      ? result = 'Die Zahl $number ist negativ.'
+      : result = 'Die Zahl $number ist positiv.';
+  return result;
+}
+
+// Bonusaufgabe 8 - Wortbuchstaben einzeln in Liste schreiben:
+List<String> lettersToList(String word) {
+  List<String> charList = [];
+  for (int i = 0; i < word.length; i++) {
+    charList.add(word[i]);
+  }
+  return charList;
+}
+
+// Bonusaufgabe 9 - Wortbuchstaben einzeln in Liste schreiben:
+Map<String, int> letterPerStringToList(List list) {
+  Map<String, int> letterPerString = {};
+  list.forEach((element) {
+    int countElementChars = element.length;
+    letterPerString.addEntries([new MapEntry(element, countElementChars)]);
+  });
+  // for (int i = 0; i < word.length; i++) {
+  //   charList.add(word[i]);
+  // }
+  return letterPerString;
+}
+
+// Bonusaufgabe 10 - Produkt aus 2 Zahlen, die mit 3 Zahl extra berechnet werden:
+int multiplyNumbers(int number1, int number2) {
+  int result = number1 * number2;
+  return result;
 }
