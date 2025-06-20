@@ -102,7 +102,7 @@ main() {
   print(letterPerStringToListAGAIN(whateverText));
   print('\n');
 
-  print('Bonusaufgabe 14 - Bonusaufgabe 14 - Fahrenheit/Celsius Umrechner:');
+  print('Bonusaufgabe 14 - Fahrenheit/Celsius Umrechner:');
   print(converterFahrenheitCelsius(12, 'fahrenheit'));
   print('\n');
 }
