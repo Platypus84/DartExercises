@@ -92,10 +92,6 @@ main() {
   print(smallestNumberFromList(numList2));
   print('\n');
 
-  print('Bonusaufgabe 12 - Kleinste Zahl aus Liste:');
-  print(smallestNumberFromList(numList2));
-  print('\n');
-
   print(
     'Bonusaufgabe 13 - Anzahl Buchstaben pro String aus Liste mit Strings:',
   );
