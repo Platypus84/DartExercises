@@ -213,16 +213,21 @@ int smallestNumberFromList(List<int> numbers) {
 Map<String, int> letterPerStringToListAGAIN(List list) {
   Map<String, int> SameMap = letterPerStringToList(list);
   return SameMap;
-  // Hatte Aufgabe 9 schon mit einer Map gelöst, auch wenn man es bei 9 auch einzeln über Prints ausgeben könnte.
+  // Hatte Aufgabe 9 schon mit einer Map gelöst, wobei man es bei Aufgabe 9 natürlich auch über einzelne Prints in der Schleife hatte ausgeben könnte.
 }
 
 // Bonusaufgabe 14 - Fahrenheit/Celsius Umrechner:
-double converterFahrenheitCelsius(int number, String type) {
+String converterFahrenheitCelsius(int number, String type) {
   double temp = 0;
-  if (type == 'fahrenheit') {
+  String newType = '';
+  type = "${type[0].toUpperCase()}${type.substring(1).toLowerCase()}";
+
+  if (type == 'Fahrenheit') {
     temp = (number * 1.8) + 32;
-  } else if (type == 'celsius') {
+    newType = 'Celsius';
+  } else if (type == 'Celsius') {
     temp = (number - 32) / 1.8;
+    newType = 'Fahrenheit';
   }
-  return temp;
+  return '$number Grad $type sind $temp Grad $newType.';
 }
