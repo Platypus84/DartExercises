@@ -1,6 +1,8 @@
+import 'dart:math';
+
 main() {
   List<int> numList1 = [34, 57, 1, 100, -45, 2, 7, 12, 73, -17];
-  List<int> numList2 = [5, 82, 19, 17];
+  List<int> numList2 = [5, 82, 4, 17];
   List<int> numList3 = [100, -42, 17, 231];
   List<String> whateverText = [
     'Kunibert',
@@ -80,6 +82,28 @@ main() {
     'Bonusaufgabe 10 - Produkt aus 2 Zahlen, das mit 3.Zahl zusätzlich multipliziert wird:',
   );
   print('Das Ergebnis ist: ${multiplyNumbers(9, 5) * 10}');
+  print('\n');
+
+  print('Bonusaufgabe 11 - Vorzeichen von Zahl ändern:');
+  print(changeSign(-35));
+  print('\n');
+
+  print('Bonusaufgabe 12 - Kleinste Zahl aus Liste:');
+  print(smallestNumberFromList(numList2));
+  print('\n');
+
+  print('Bonusaufgabe 12 - Kleinste Zahl aus Liste:');
+  print(smallestNumberFromList(numList2));
+  print('\n');
+
+  print(
+    'Bonusaufgabe 13 - Anzahl Buchstaben pro String aus Liste mit Strings:',
+  );
+  print(letterPerStringToListAGAIN(whateverText));
+  print('\n');
+
+  print('Bonusaufgabe 14 - Bonusaufgabe 14 - Fahrenheit/Celsius Umrechner:');
+  print(converterFahrenheitCelsius(12, 'fahrenheit'));
   print('\n');
 }
 
@@ -171,4 +195,34 @@ Map<String, int> letterPerStringToList(List list) {
 int multiplyNumbers(int number1, int number2) {
   int result = number1 * number2;
   return result;
+}
+
+// Bonusaufgabe 11 - Vorzeichen von Zahl ändern:
+int changeSign(int number) {
+  number.isNegative ? number = number * -1 : number = -number;
+  return number;
+}
+
+// Bonusaufgabe 12 - Kleinste Zahl aus Liste:
+int smallestNumberFromList(List<int> numbers) {
+  int smallestListNumber = numbers.reduce(min);
+  return smallestListNumber;
+}
+
+// Bonusaufgabe 13 - Identisch wie Aufgabe 9:
+Map<String, int> letterPerStringToListAGAIN(List list) {
+  Map<String, int> SameMap = letterPerStringToList(list);
+  return SameMap;
+  // Hatte Aufgabe 9 schon mit einer Map gelöst, auch wenn man es bei 9 auch einzeln über Prints ausgeben könnte.
+}
+
+// Bonusaufgabe 14 - Fahrenheit/Celsius Umrechner:
+double converterFahrenheitCelsius(int number, String type) {
+  double temp = 0;
+  if (type == 'fahrenheit') {
+    temp = (number * 1.8) + 32;
+  } else if (type == 'celsius') {
+    temp = (number - 32) / 1.8;
+  }
+  return temp;
 }

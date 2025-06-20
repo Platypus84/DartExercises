@@ -12,7 +12,7 @@ main() {
   print('\n');
 
   print('Aufgabe 3 - Vokale in Wort zählen:');
-  print(countVowls('Ananas'));
+  print(countVowls('Annas'));
   print(countVowls('Simsalabim'));
   print(countVowls('Donaudampfschiffkapitänsmütze'));
   print('\n');
