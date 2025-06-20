@@ -42,7 +42,7 @@ void triplePrint(String text) {
   print('\n');
 }
 
-//
+// AUFGABE 3 - Initialen umdrehen:
 void reverseInitials(String firstName, String lastName) {
   String revInitialFirstName = firstName[firstName.length - 1].toUpperCase();
   String revInitialLastName = lastName[lastName.length - 1].toUpperCase();
