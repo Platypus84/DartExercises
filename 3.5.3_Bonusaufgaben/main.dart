@@ -181,9 +181,6 @@ Map<String, int> letterPerStringToList(List list) {
     int countElementChars = element.length;
     letterPerString.addEntries([new MapEntry(element, countElementChars)]);
   });
-  // for (int i = 0; i < word.length; i++) {
-  //   charList.add(word[i]);
-  // }
   return letterPerString;
 }
 
