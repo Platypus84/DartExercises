@@ -3,7 +3,7 @@ import 'dart:math';
 
 class Calculator {
   late double? _operand01;
-  double? _operand02 = 0;
+  double? _operand02;
   double? _result;
   late int? _continueCalc;
   late int? _saveResult;
@@ -20,7 +20,7 @@ class Calculator {
   };
 
   Calculator() {
-    print('\n' + ' TASCHENRECHNER');
+    print('\n' + ' TASCHENRECHNER 🤓');
   }
 
   void runCalculator() {
@@ -41,7 +41,7 @@ class Calculator {
       print('\n');
       print(
         '\u001B[31m' +
-            ' FEHLER: Für die Ziffer/Eingabe' +
+            ' ❌ FEHLER: Für die Ziffer/Eingabe' +
             '\u001B[34m' +
             ' $calculus ' +
             '\u001B[31m' +
@@ -90,7 +90,7 @@ class Calculator {
 
     // Ausgabe des Rechenergebnisses:
     print('\n' + ' - - - Das Ergebnis - - -');
-    print('\n' + '\u001b[32m' + ' ${this._result}' + '\u001b[30m');
+    print('\n' + ' 🟢 ' + '\u001b[32m' + ' ${this._result}' + '\u001b[30m');
     print('\n' + ' - - - - - - - - - - - - ' + '\n');
 
     // Eingabe zum Weiterrechnen:
@@ -180,7 +180,7 @@ class Calculator {
       print('\n');
       print(
         '\u001B[31m' +
-            ' FEHLER: Die Eingabe' +
+            ' ❌ FEHLER: Die Eingabe' +
             '\u001B[34m' +
             ' $operand ' +
             '\u001B[31m' +
