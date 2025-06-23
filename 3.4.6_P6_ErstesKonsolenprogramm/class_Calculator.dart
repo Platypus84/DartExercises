@@ -14,7 +14,7 @@ class Calculator {
     2: 'Subtraktion',
     3: 'Multiplikation',
     4: 'Division',
-    5: 'Modulo', // to Do: unzulässig für Fließkommazahlen? / nur in C? -> checken)
+    5: 'Modulo',
     6: 'Quadratwurzel',
     7: 'Potenz',
   };
