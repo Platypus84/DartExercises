@@ -5,8 +5,8 @@ void main() {
   print(Person('Thomas', 33).name);
   print(Person('Thomas', 33).age);
   // alternativ:
-  print('\n' + 'Bonusaufgabe 1 Alternative:');
   Person person = Person('Thomas', 33);
+  print('\n' + 'Bonusaufgabe 1 Alternative:');
   print(person.name);
   print(person.age);
 
@@ -32,13 +32,11 @@ void main() {
   print(Rectangle2.calculateSurface());
 
   // Bonusaufgabe 5:
-  print('\n' + 'Bonusaufgabe 5:');
   Map<String, num> scaledMeasures = Rectangle1.scale(2);
+  print('\n' + 'Bonusaufgabe 5:');
   print(scaledMeasures);
 
   // Bonusaufgabe 6:
-  print('\n' + 'Bonusaufgabe 6:');
-
   Author author1 = new Author(
     name: 'Michael Ende',
     birthday: DateTime.utc(1929, 11, 12),
@@ -50,6 +48,7 @@ void main() {
     pageCount: 428,
   );
 
+  print('\n' + 'Bonusaufgabe 6:');
   print(
     'Buchtitel: ${book1.bookTitle}' +
         '\n' +
