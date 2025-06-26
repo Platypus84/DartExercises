@@ -41,7 +41,7 @@ void main() {
 
   Author author1 = new Author(
     name: 'Michael Ende',
-    birthday: DateTime.utc(1923, 11, 12),
+    birthday: DateTime.utc(1929, 11, 12),
   );
 
   Book book1 = new Book(
