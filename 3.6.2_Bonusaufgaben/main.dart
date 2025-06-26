@@ -88,8 +88,8 @@ class Button {
 
 // Bonusaufgabe 3 + 4 + 5
 class Rechteck {
-  late num x;
-  late num y;
+  num x;
+  num y;
 
   Rechteck({required this.x, required this.y});
 
@@ -112,16 +112,16 @@ class Rechteck {
 
 // Bonusaufgabe 6
 class Author {
-  late String name;
-  late DateTime birthday;
+  String name;
+  DateTime birthday;
 
   Author({required this.name, required this.birthday});
 }
 
 class Book {
-  late String bookTitle;
-  late int pageCount;
-  late Author author;
+  String bookTitle;
+  int pageCount;
+  Author author;
 
   Book({
     required this.bookTitle,
